@@ -79,7 +79,6 @@ int bbb_read_dht22(unsigned short pin, float *temperature, float *humidity) {
     // Return -1 if the checksum failed
     if ( ((data[0] + data[1] + data[2] + data[3]) & 0xFF) != data[4] )
     {
-        std::cout << "Checksum failed" << std::endl;
         return -1;
     }
 
@@ -89,9 +88,6 @@ int bbb_read_dht22(unsigned short pin, float *temperature, float *humidity) {
     *temperature = ( (data[2] & 0x7F)* 256 + data[3] ) / 10.0;
     if (data[2] & 0x80)
         *temperature *= -1.0f;
-
-    // Print to console
-    std::cout << "Temp = " << *temperature << "°C, Hum = " << *humidity << "%\n";
 
     return 0;
 }
