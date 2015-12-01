@@ -8,17 +8,14 @@
  * @return Returns zero if successful. Returns -1 if the checksum for data is failed.
  */
 int bbb_read_dht22(unsigned short pin, float *temperature, float *humidity) {
-
     Beagle_GPIO	gpio;
-
     int counter = 0;
     int laststate = 1;
     int j = 0;
     int state[250], data[100] = {0};
     struct timespec timestamp[250];
     int bitidx = 0;
-
-    clockid_t clk_id = CLOCK_REALTIME ;
+    clockid_t clk_id = CLOCK_REALTIME;
 
     gpio.configurePin(pin, Beagle_GPIO::kOUTPUT);
     gpio.enablePinInterrupts(pin, false);
@@ -41,7 +38,6 @@ int bbb_read_dht22(unsigned short pin, float *temperature, float *humidity) {
         ;
 
     // Read data
-
     for (int i = 0; i < MAXTIMINGS; ++i) {
         counter = 0;
         while (gpio.readPin(pin) == laststate) {
@@ -92,7 +88,6 @@ int bbb_read_dht22(unsigned short pin, float *temperature, float *humidity) {
     return 0;
 }
 
-/* Compute diff for timespec (from clock_gettime)*/
 /**
  * @brief diff Compute diff for timespec from clock_gettime
  * @param start Starting time
