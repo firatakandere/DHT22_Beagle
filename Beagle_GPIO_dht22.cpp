@@ -81,7 +81,7 @@ int bbb_read_dht22(unsigned short pin, float *temperature, float *humidity) {
     // Compute the Temp & Hum from data (for RHT3 / DHT22)
     *humidity = ( data[0] * 256 + data[1] ) / 10;
 
-    *temperature = ( (data[2] & 0x7F)* 256 + data[3] ) / 10.0;
+    *temperature = ( (data[2] & 0x7F) * 256 + data[3] ) / 10.0;
     if (data[2] & 0x80)
         *temperature *= -1.0f;
 
@@ -97,7 +97,7 @@ int bbb_read_dht22(unsigned short pin, float *temperature, float *humidity) {
 timespec diff(timespec start, timespec end)
 {
     timespec temp;
-    if ((end.tv_nsec-start.tv_nsec) < 0) {
+    if ((end.tv_nsec - start.tv_nsec) < 0) {
         temp.tv_sec = end.tv_sec - start.tv_sec - 1;
         temp.tv_nsec = 1000000000 + end.tv_nsec - start.tv_nsec;
     } else {
